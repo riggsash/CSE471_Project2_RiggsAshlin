@@ -69,6 +69,8 @@ CRotoScopeDoc::CRotoScopeDoc()
 	m_bird.LoadFile(L"birdp.png");
 
 	//OnEditSetvariables();
+
+	m_moviemake.SetProfileName(L"profile720p.prx");  // PROJECT 2 "What You Turn In"
 }
 
 //! Destructor
@@ -409,6 +411,7 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 	int x = p_x;                            // No problem there.
 	int y = m_image.GetHeight() - p_y - 1;     // Just invert it.
 
+	/*
 	if (m_mode == 0)
 	{
 
@@ -422,6 +425,41 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 
 		DrawImage();
 	}
+	*/
+
+	/////////
+	// PROJECT 2: MAKE PIXEL SIZE BIGGER
+	/////////
+	if (m_mode == 0)
+	{
+		// Ensure there is an entry for every frame up till this one...
+		std::list<CPoint> empty;
+		while ((int)m_draw.size() < m_movieframe + 1)
+			m_draw.push_back(empty);
+
+		// Size of the dot
+		int dotSize = 5; // You can change this to set the dot size
+		int halfSize = dotSize / 2;
+
+		for (int dy = -halfSize; dy <= halfSize; dy++)
+		{
+			for (int dx = -halfSize; dx <= halfSize; dx++)
+			{
+				int drawX = x + dx;
+				int drawY = y + dy;
+
+				// Check bounds to avoid drawing outside the image
+				if (drawX >= 0 && drawX < m_image.GetWidth() && drawY >= 0 && drawY < m_image.GetHeight())
+				{
+					// Add the mouse point to the list for the frame
+					m_draw[m_movieframe].push_back(CPoint(drawX, drawY));
+				}
+			}
+		}
+
+		DrawImage();
+	}
+
 
 	else if (m_mode == 1)
 	{
