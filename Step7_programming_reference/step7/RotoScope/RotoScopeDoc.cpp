@@ -767,6 +767,56 @@ void CRotoScopeDoc::OnEditClearframe()
 	UpdateAllViews(NULL);
 }
 
+/////////
+// PROJECT 2: ADDING SINUSOIDAL IMAGE WARP
+/////////
+void CRotoScopeDoc::DrawImage()
+{
+	CGrImage tempImage;  // Temporary image for processing
+	tempImage.SetSameSize(m_initial);
+
+	// Sinusoidal parameters
+	const double amplitude = 5;  // Change this for more/less wave
+	const double frequency = 0.05;  // Change this for more/less frequent waves
+
+	for (int r = 0; r < m_image.GetHeight(); r++)
+	{
+		for (int c = 0; c < m_image.GetWidth(); c++)
+		{
+			// Applying the sinusoidal warp
+			int warpedC = c + int(amplitude * sin(frequency * r));
+			int warpedR = r + int(amplitude * sin(frequency * c));
+
+			// Ensure we don't go out of bounds
+			if (warpedC >= 0 && warpedC < m_image.GetWidth() && warpedR >= 0 && warpedR < m_image.GetHeight())
+			{
+				tempImage[warpedR][warpedC * 3] = m_initial[r][c * 3];
+				tempImage[warpedR][warpedC * 3 + 1] = m_initial[r][c * 3 + 1];
+				tempImage[warpedR][warpedC * 3 + 2] = m_initial[r][c * 3 + 2];
+			}
+		}
+	}
+
+	// Copy the processed image back to m_image
+	m_image = tempImage;
+
+	// Write any saved drawings into the frame
+	if (m_movieframe < (int)m_draw.size())
+	{
+		for (std::list<CPoint>::iterator i = m_draw[m_movieframe].begin();
+			i != m_draw[m_movieframe].end();  i++)
+		{
+			for (int w = 0; w < m_width; w++)
+			{
+				m_image.Set(i->x + w, i->y, m_r, m_g, m_b);
+			}
+		}
+	}
+
+	UpdateAllViews(NULL);
+}
+
+/*
 void CRotoScopeDoc::DrawImage()
 {
 	// Write image from m_initial into the current image
@@ -795,7 +845,7 @@ void CRotoScopeDoc::DrawImage()
 
 	UpdateAllViews(NULL);
 }
-
+*/
 
 void CRotoScopeDoc::OnEditDrawline()
 {
