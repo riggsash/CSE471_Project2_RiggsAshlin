@@ -120,6 +120,7 @@ public:
 	afx_msg void OnMousemodeLine();
 	afx_msg void OnMousemodeBird();
 	afx_msg void OnEditUndo32793();
+	void ApplyWaveEffect(); // PROJECT 2
 };
 
 

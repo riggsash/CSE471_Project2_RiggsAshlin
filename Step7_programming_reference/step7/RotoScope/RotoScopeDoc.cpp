@@ -430,6 +430,7 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 	/////////
 	// PROJECT 2: MAKE PIXEL SIZE BIGGER
 	/////////
+	/**/
 	if (m_mode == 0)
 	{
 		// Ensure there is an entry for every frame up till this one...
@@ -459,7 +460,7 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 
 		DrawImage();
 	}
-
+	/**/
 
 	else if (m_mode == 1)
 	{
@@ -770,55 +771,43 @@ void CRotoScopeDoc::OnEditClearframe()
 /////////
 // PROJECT 2: ADDING SINUSOIDAL IMAGE WARP
 /////////
-void CRotoScopeDoc::DrawImage()
+void CRotoScopeDoc::ApplyWaveEffect()
 {
-	CGrImage tempImage;  // Temporary image for processing
-	tempImage.SetSameSize(m_initial);
+	CGrImage tempImage;
+	tempImage.SetSameSize(m_image);
 
-	// Sinusoidal parameters
-	const double amplitude = 5;  // Change this for more/less wave
-	const double frequency = 0.05;  // Change this for more/less frequent waves
+	double waveAmplitude = 6.0; // Amplitude of the wave
+	double waveFrequency = 0.1;  // Frequency of the wave
 
-	for (int r = 0; r < m_image.GetHeight(); r++)
+	for (int y = 0; y < m_image.GetHeight(); y++)
 	{
-		for (int c = 0; c < m_image.GetWidth(); c++)
+		for (int x = 0; x < m_image.GetWidth(); x++)
 		{
-			// Applying the sinusoidal warp
-			int warpedC = c + int(amplitude * sin(frequency * r));
-			int warpedR = r + int(amplitude * sin(frequency * c));
+			// Applying the wave effect
+			int newX = x + waveAmplitude * sin(y * waveFrequency);
+			int newY = y + waveAmplitude * cos(x * waveFrequency);
 
-			// Ensure we don't go out of bounds
-			if (warpedC >= 0 && warpedC < m_image.GetWidth() && warpedR >= 0 && warpedR < m_image.GetHeight())
-			{
-				tempImage[warpedR][warpedC * 3] = m_initial[r][c * 3];
-				tempImage[warpedR][warpedC * 3 + 1] = m_initial[r][c * 3 + 1];
-				tempImage[warpedR][warpedC * 3 + 2] = m_initial[r][c * 3 + 2];
-			}
+			// Bounds checking
+			newX = max(0, min(m_image.GetWidth() - 1, newX));
+			newY = max(0, min(m_image.GetHeight() - 1, newY));
+
+			// Copy pixel
+			tempImage[y][x * 3] = m_image[newY][newX * 3];
+			tempImage[y][x * 3 + 1] = m_image[newY][newX * 3 + 1];
+			tempImage[y][x * 3 + 2] = m_image[newY][newX * 3 + 2];
 		}
 	}
 
-	// Copy the processed image back to m_image
+	// Copy the modified image back to m_image
 	m_image = tempImage;
-
-	// Write any saved drawings into the frame
-	if (m_movieframe < (int)m_draw.size())
-	{
-		for (std::list<CPoint>::iterator i = m_draw[m_movieframe].begin();
-			i != m_draw[m_movieframe].end();  i++)
-		{
-			for (int w = 0; w < m_width; w++)
-			{
-				m_image.Set(i->x + w, i->y, m_r, m_g, m_b);
-			}
-		}
-	}
-
-	UpdateAllViews(NULL);
 }
 
-/*
+
+/**/
 void CRotoScopeDoc::DrawImage()
 {
+	
+
 	// Write image from m_initial into the current image
 	for (int r = 0; r<m_image.GetHeight() && r<m_initial.GetHeight(); r++)
 	{
@@ -843,9 +832,13 @@ void CRotoScopeDoc::DrawImage()
 		}
 	}
 
+	// PROJECT 2:
+	// CALL IMAGE WARP
+	ApplyWaveEffect();
+
 	UpdateAllViews(NULL);
 }
-*/
+/**/
 
 void CRotoScopeDoc::OnEditDrawline()
 {
