@@ -12,7 +12,7 @@
 10/10	You appear in your video  
 1/1 Extra credit additional item in Category I  
 _/1 Extra credit additional item in Category II  
-__ Total  
+81 Total  
 
 ### Category I  
 **1. Outlined drawings of characters or objects in your video.**  
