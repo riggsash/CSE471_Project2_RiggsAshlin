@@ -15,13 +15,16 @@ _/1 Extra credit additional item in Category II
 __ Total  
 
 ### Category I  
-For this category, I animated my dancing to add motion/wind behind my legs as I kicked.  
+**1. Outlined drawings of characters or objects in your video.**  
+**EXTRA CREDIT: Painting effects, which you draw over the image on a frame-by-frame basis, perhaps to make it appear drawn**  
+For this category, I outlined my figurines and added eyes (bullet 1). For my extra credit, I painted changing patterns over the background (bullet 7).    
 
 ### Category II  
-For this category, I warped the first 5 seconds of the video. I cut off the warp after 5 seconds because I thought it would be annoying and hard to see the rest of the video.  
+**1. Some interesting non-linear image warp.**
+For this category, I created a vertical and horizontal sinusoidal warp across my video.  
 
 ### Category III  
-For this category, I keyed the green in my pants to make them pink.  
+N/A  
 
 ### Files (Input)  
 My input files are a video of me dancing and a 35 second excerpt of Tchaikovsky's Swan Lake Waltz.  
