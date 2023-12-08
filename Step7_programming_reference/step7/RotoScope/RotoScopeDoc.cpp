@@ -411,7 +411,7 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 	int x = p_x;                            // No problem there.
 	int y = m_image.GetHeight() - p_y - 1;     // Just invert it.
 
-	/*
+	/**/
 	if (m_mode == 0)
 	{
 
@@ -425,12 +425,12 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 
 		DrawImage();
 	}
-	*/
+	/**/
 
 	/////////
 	// PROJECT 2: MAKE PIXEL SIZE BIGGER
 	/////////
-	/**/
+	/*
 	if (m_mode == 0)
 	{
 		// Ensure there is an entry for every frame up till this one...
@@ -439,7 +439,7 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 			m_draw.push_back(empty);
 
 		// Size of the dot
-		int dotSize = 5; // You can change this to set the dot size
+		int dotSize = 2; // You can change this to set the dot size
 		int halfSize = dotSize / 2;
 
 		for (int dy = -halfSize; dy <= halfSize; dy++)
@@ -460,7 +460,7 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 
 		DrawImage();
 	}
-	/**/
+	*/
 
 	else if (m_mode == 1)
 	{
@@ -776,29 +776,29 @@ void CRotoScopeDoc::ApplyWaveEffect()
 	CGrImage tempImage;
 	tempImage.SetSameSize(m_image);
 
-	double waveAmplitude = 6.0; // Amplitude of the wave
-	double waveFrequency = 0.1;  // Frequency of the wave
+	double waveAmplitude = 4.0; // amplitude of the wave
+	double waveFrequency = 0.1;  // frequency of the wave
 
 	for (int y = 0; y < m_image.GetHeight(); y++)
 	{
 		for (int x = 0; x < m_image.GetWidth(); x++)
 		{
-			// Applying the wave effect
+			// apply wave effect
 			int newX = x + waveAmplitude * sin(y * waveFrequency);
 			int newY = y + waveAmplitude * cos(x * waveFrequency);
 
-			// Bounds checking
+			// make sure within bounds
 			newX = max(0, min(m_image.GetWidth() - 1, newX));
 			newY = max(0, min(m_image.GetHeight() - 1, newY));
 
-			// Copy pixel
+			// copy to temp
 			tempImage[y][x * 3] = m_image[newY][newX * 3];
 			tempImage[y][x * 3 + 1] = m_image[newY][newX * 3 + 1];
 			tempImage[y][x * 3 + 2] = m_image[newY][newX * 3 + 2];
 		}
 	}
 
-	// Copy the modified image back to m_image
+	// copy modified image back to m_image
 	m_image = tempImage;
 }
 
