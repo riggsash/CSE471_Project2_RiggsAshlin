@@ -13,9 +13,8 @@
 _/1 Extra credit additional item in Category II  
 **80.5/100 Total Points** 
 
-### Category I  
+### Category I + Extra Credit  
 **1. Outlined drawings of characters or objects in your video.**  
-**EXTRA CREDIT: Painting effects, which you draw over the image on a frame-by-frame basis, perhaps to make it appear drawn**  
 For this category, I outlined my figurines (bullet 1). For my extra credit (0.5 pts), I animated my own eyes for half-ish of the video. ALSO, I made the dragon figure breathe fire if you look closely!  
 
 ### Category II  
