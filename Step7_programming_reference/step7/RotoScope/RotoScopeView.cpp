@@ -39,7 +39,7 @@ CRotoScopeView::~CRotoScopeView()
  * \returns true if successful */
 BOOL CRotoScopeView::PreCreateWindow(CREATESTRUCT& cs)
 {
-    SetScrollSizes(MM_TEXT, CSize(720, 480));
+    SetScrollSizes(MM_TEXT, CSize(720, 720));
 
 	return CScrollView::PreCreateWindow(cs);
 }

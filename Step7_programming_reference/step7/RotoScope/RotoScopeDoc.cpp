@@ -58,7 +58,7 @@ CRotoScopeDoc::CRotoScopeDoc()
     ::CoInitialize(NULL);
 
     // Set the image size to an initial default value and black.
-	m_image.SetSize(640, 480);
+	m_image.SetSize(720, 720);  // CHANGED FOR PROJECT 2
     m_image.Fill(0, 0, 0);
 	m_movieframe = 0;
 	m_b = 0;
@@ -411,7 +411,7 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 	int x = p_x;                            // No problem there.
 	int y = m_image.GetHeight() - p_y - 1;     // Just invert it.
 
-	/**/
+	/*
 	if (m_mode == 0)
 	{
 
@@ -425,12 +425,12 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 
 		DrawImage();
 	}
-	/**/
+	*/
 
 	/////////
 	// PROJECT 2: MAKE PIXEL SIZE BIGGER
 	/////////
-	/*
+	/**/
 	if (m_mode == 0)
 	{
 		// Ensure there is an entry for every frame up till this one...
@@ -439,7 +439,7 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 			m_draw.push_back(empty);
 
 		// Size of the dot
-		int dotSize = 2; // You can change this to set the dot size
+		int dotSize = 3; // You can change this to set the dot size
 		int halfSize = dotSize / 2;
 
 		for (int dy = -halfSize; dy <= halfSize; dy++)
@@ -460,7 +460,7 @@ void CRotoScopeDoc::Mouse(int p_x, int p_y)
 
 		DrawImage();
 	}
-	*/
+	/**/
 
 	else if (m_mode == 1)
 	{
